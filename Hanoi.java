@@ -49,49 +49,46 @@ public class Hanoi {
 
 			numberMaybe = scan.nextLine();
 
-			Scanner numScan = new Scanner(numberMaybe);
-			String numberMaybeCopy = numScan.next();
-			numScan.close();
-
 			System.out.println("\n");
 
 			/*
-			 * Will execute if rings are 0 or integer values between -∞ and 0.
+			 * Will execute if rings are integer values between -∞ and 0.
 			 */
-			if (Integer.parseInt(numberMaybe) < 1 || Integer.parseInt(numberMaybeCopy) < 1) {
-				Integer.parseInt("0.5"); // to throw exception
+			for (char c : numberMaybe.toCharArray()) {
+				if (!Character.isDigit(c) && !Character.isLetter(c)) {
+					badRingNum(scan);
+				}
 			}
-			
-			if (numberMaybe.length() < numberMaybeCopy.length()) {
-				move(Integer.parseInt(numberMaybeCopy), "First Peg", "Last Peg", "Middle Peg");
-			} else {
-				move(Integer.parseInt(numberMaybe), "First Peg", "Last Peg", "Middle Peg");
-			}
+			move(Integer.parseInt(numberMaybe), "First Peg", "Last Peg", "Middle Peg");
 
 			scan.close();
 
 		} catch (NumberFormatException e) {
-			System.out.println(numberMaybe + " is not a valid number of rings.");
-			System.out.print("Try again? Enter 'y' for yes or 'n' for no: ");
+			e.toString();
+		}
+	}
 
-			String tryAgain = scan.nextLine();
+	private static void badRingNum(Scanner scan) {
+		System.out.println(numberMaybe + " is not a valid number of rings.");
+		System.out.print("Try again? Enter 'y' for yes or 'n' for no: ");
 
-			if (tryAgain.equalsIgnoreCase("n") || tryAgain.equalsIgnoreCase("no")) {
-				scan.close();
-				System.out.print("\n\nTower wasn't solved. Sorry you didn't have fun.");
-				quit = true;
-				return; // exits method if user enters quit
-				
-			} else if (tryAgain.equalsIgnoreCase("y") || tryAgain.equalsIgnoreCase("yes")) {
-				System.out.println("\n");
-				tower();
-				
-			} else {
-				System.out.println("\n");
-				System.out.println("You didn't follow instructions, so I'm choosing for you.");
-				System.out.println("You're trying again.");
-				tower();
-			}
+		String tryAgain = scan.nextLine();
+
+		if (tryAgain.equalsIgnoreCase("n") || tryAgain.equalsIgnoreCase("no")) {
+			scan.close();
+			System.out.print("\n\nTower wasn't solved. Sorry you didn't have fun.");
+			quit = true;
+			return; // exits method if user enters quit
+
+		} else if (tryAgain.equalsIgnoreCase("y") || tryAgain.equalsIgnoreCase("yes")) {
+			System.out.println("\n");
+			tower();
+
+		} else {
+			System.out.println("\n");
+			System.out.println("You didn't follow instructions, so I'm choosing for you.");
+			System.out.println("You're trying again.");
+			tower();
 		}
 	}
 
@@ -107,6 +104,11 @@ public class Hanoi {
 	 * @param temp  the peg in the middle of the start and end peg
 	 */
 	public static void move(int rings, String start, String end, String temp) {
+		if (rings == 0) {
+			System.out.println("There are no rings, so no moves can be made.");
+			return;
+		}
+		
 		String countFormat = null; // to print numbers in columns
 
 		if (rings == 1) {
