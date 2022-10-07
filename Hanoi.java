@@ -31,7 +31,11 @@ public class Hanoi {
 
 		count--; // to prevent adding to count after last move
 		countFormat = NumberFormat.getIntegerInstance().format(count);
-		System.out.print("\nMinimum number of moves for " + numberMaybe + " rings: " + countFormat + '.');
+		if (count == 1) {
+			System.out.print("\nMinimum number of moves for " + numberMaybe + " ring: " + countFormat + '.');
+		} else {
+			System.out.print("\nMinimum number of moves for " + numberMaybe + " rings: " + countFormat + '.');
+		}
 		System.out.print("\nTower Solved. The End.");
 	}
 
@@ -110,7 +114,7 @@ public class Hanoi {
 			quit = true;
 			return;
 		}
-		
+
 		String countFormat = null; // to print numbers in columns
 
 		if (rings == 1) {
