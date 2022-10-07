@@ -55,8 +55,9 @@ public class Hanoi {
 			 * Will execute if rings are integer values between -∞ and 0.
 			 */
 			for (char c : numberMaybe.toCharArray()) {
-				if (!Character.isDigit(c) && !Character.isLetter(c)) {
+				if (!Character.isDigit(c)) {
 					badRingNum(scan);
+					return;
 				}
 			}
 			move(Integer.parseInt(numberMaybe), "First Peg", "Last Peg", "Middle Peg");
@@ -106,6 +107,7 @@ public class Hanoi {
 	public static void move(int rings, String start, String end, String temp) {
 		if (rings == 0) {
 			System.out.println("There are no rings, so no moves can be made.");
+			quit = true;
 			return;
 		}
 		
