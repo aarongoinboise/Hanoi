@@ -19,7 +19,7 @@ public class Hanoi {
 	 * number of moves to solve it, and gives confirmation of completion of the
 	 * program.
 	 * 
-	 * @param args the user input when asked to enter number of rings
+	 * @param args command line args, not used in this program
 	 */
 	public static void main(String[] args) {
 
@@ -72,7 +72,12 @@ public class Hanoi {
 			e.toString();
 		}
 	}
-
+	
+	/**
+	 * Used when an incorrect number of rings is provided by user. Reprompts user to pick a different number.
+	 * 
+	 * @param scan the Scanner being used in tower()
+	 */
 	private static void badRingNum(Scanner scan) {
 		System.out.println(numberMaybe + " is not a valid number of rings.");
 		System.out.print("Try again? Enter 'y' for yes or 'n' for no: ");
